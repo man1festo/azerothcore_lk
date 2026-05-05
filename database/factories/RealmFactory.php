@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class RealmFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Определить состояние модели по умолчанию.
      *
      * @return array<string, mixed>
      */
@@ -20,8 +20,7 @@ class RealmFactory extends Factory
         return [
             'name' => fake()->word() . ' Realm',
             'type' => fake()->randomElement(['PvP', 'PvE', 'RP', 'RP-PvP']),
-            'connection' => fake()->ipv4(),
+            'connection' => fake()->domainName() . ':' . fake()->numberBetween(3000, 4000),
         ];
     }
 }
-
