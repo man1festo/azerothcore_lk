@@ -33,5 +33,61 @@ class CharacterFactory extends Factory
             'updated_at' => fake()->dateTimeThisYear(),
         ];
     }
-}
 
+    /**
+     * Create a high-level character.
+     */
+    public function highLevel(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'content' => array_merge($attributes['content'] ?? [], [
+                    'level' => fake()->numberBetween(70, 80),
+                    'achievement_points' => fake()->numberBetween(5000, 10000),
+                ]),
+            ];
+        });
+    }
+
+    /**
+     * Create a character of specific class.
+     */
+    public function ofClass(string $class): static
+    {
+        return $this->state(function (array $attributes) use ($class) {
+            return [
+                'content' => array_merge($attributes['content'] ?? [], [
+                    'class' => $class,
+                ]),
+            ];
+        });
+    }
+
+    /**
+     * Create a character of specific race.
+     */
+    public function ofRace(string $race): static
+    {
+        return $this->state(function (array $attributes) use ($race) {
+            return [
+                'content' => array_merge($attributes['content'] ?? [], [
+                    'race' => $race,
+                ]),
+            ];
+        });
+    }
+
+    /**
+     * Create a character in a guild.
+     */
+    public function inGuild(string $guild): static
+    {
+        return $this->state(function (array $attributes) use ($guild) {
+            return [
+                'content' => array_merge($attributes['content'] ?? [], [
+                    'guild' => $guild,
+                ]),
+            ];
+        });
+    }
+}

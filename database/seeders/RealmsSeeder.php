@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class RealmsSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Запустить сиды базы данных.
      */
     public function run(): void
     {
