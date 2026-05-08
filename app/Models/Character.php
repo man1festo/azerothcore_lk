@@ -31,6 +31,13 @@ class Character extends Model
         return $this->belongsTo(Realm::class);
     }
 
+    protected function casts(): array
+    {
+        return [
+            'content' => 'array',
+        ];
+    }
+
     /**
      * Get and set the character's level.
      */
@@ -38,7 +45,7 @@ class Character extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->content['level'] ?? 1,
-            set: fn ($value) => ['content' => array_merge($this->content ?? [], ['level' => $value])]
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['level' => $value]))]
         );
     }
 
@@ -49,7 +56,7 @@ class Character extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->content['class'] ?? '',
-            set: fn ($value) => ['content' => array_merge($this->content ?? [], ['class' => $value])]
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['class' => $value]))]
         );
     }
 
@@ -60,7 +67,7 @@ class Character extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->content['race'] ?? '',
-            set: fn ($value) => ['content' => array_merge($this->content ?? [], ['race' => $value])]
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['race' => $value]))]
         );
     }
 
@@ -71,7 +78,7 @@ class Character extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->content['faction'] ?? '',
-            set: fn ($value) => ['content' => array_merge($this->content ?? [], ['faction' => $value])]
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['faction' => $value]))]
         );
     }
 
@@ -82,7 +89,7 @@ class Character extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->content['achievement_points'] ?? 0,
-            set: fn ($value) => ['content' => array_merge($this->content ?? [], ['achievement_points' => $value])]
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['achievement_points' => $value]))]
         );
     }
 
@@ -93,7 +100,7 @@ class Character extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->content['guild'] ?? null,
-            set: fn ($value) => ['content' => array_merge($this->content ?? [], ['guild' => $value])]
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['guild' => $value]))]
         );
     }
 
@@ -104,7 +111,7 @@ class Character extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->content['spec'] ?? null,
-            set: fn ($value) => ['content' => array_merge($this->content ?? [], ['spec' => $value])]
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['spec' => $value]))]
         );
     }
 
@@ -115,7 +122,18 @@ class Character extends Model
     {
         return Attribute::make(
             get: fn ($value) => $this->content['experience'] ?? 0,
-            set: fn ($value) => ['content' => array_merge($this->content ?? [], ['experience' => $value])]
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['experience' => $value]))]
+        );
+    }
+
+    /**
+     * Get and set the character's gender.
+     */
+    protected function gender(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->content['gender'] ?? 0,
+            set: fn ($value) => ['content' => json_encode(array_merge($this->content ?? [], ['gender' => $value]))]
         );
     }
 }
